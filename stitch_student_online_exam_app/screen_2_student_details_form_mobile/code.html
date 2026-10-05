@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Student Online Examination Portal - Candidate Profile</title>
+<!-- Tailwind CSS CDN with Forms & Container Queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration for custom fonts & aesthetic color palette matching reference -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serifHeading: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              cream: '#FAF7F2',
+              creamSoft: '#F6F2EB',
+              charcoal: '#1F1E1B',
+              muted: '#7A766F',
+              accentPink: '#FCE7F0',
+              accentPinkDark: '#E06596',
+              accentYellow: '#FEF3C7',
+              accentYellowDark: '#D97706',
+              accentBlue: '#E0F2FE',
+              accentBlueDark: '#0284C7',
+              accentLavender: '#EDE9FE',
+              accentLavenderDark: '#7C3AED',
+              accentMint: '#DCFCE7',
+              accentMintDark: '#15803D',
+              coralCta: '#1E1B18',
+            }
+          },
+          borderRadius: {
+            '3xl': '24px',
+            '4xl': '32px',
+          },
+          boxShadow: {
+            'soft': '0 8px 30px rgba(0, 0, 0, 0.04)',
+            'pill': '0 2px 10px rgba(0, 0, 0, 0.03)',
+            'cta': '0 12px 25px -4px rgba(30, 27, 24, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Google Fonts: Plus Jakarta Sans & Instrument Serif for matching warm editorial design -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- BEGIN: CustomStyles -->
+<style data-purpose="base-styling">
+    body {
+      background-color: #ECE7DE;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Device frame wrapper to match 390px iPhone mobile viewport request */
+    .mobile-screen-container {
+      width: 100%;
+      max-width: 390px;
+      min-height: 844px;
+      margin: 0 auto;
+      background-color: #FAF7F2;
+      position: relative;
+      overflow-x: hidden;
+    }
+  </style>
+<style data-purpose="decorative-mesh-gradient">
+    /* Subtle organic warm pastel gradient top wash seen in reference artwork */
+    .hero-gradient-wash {
+      background: radial-gradient(circle at 10% 0%, #FFE8E5 0%, transparent 45%),
+                  radial-gradient(circle at 95% 5%, #FEF3C7 0%, transparent 50%),
+                  radial-gradient(circle at 50% 15%, #F5E8FF 0%, transparent 40%);
+    }
+  </style>
+<!-- END: CustomStyles -->
+</head>
+<body class="flex justify-center items-center py-0 sm:py-8 min-h-screen text-[#1E1B18]">
+<!-- Mobile Viewport Frame (390px width) -->
+<div class="mobile-screen-container shadow-2xl sm:rounded-[44px] border-0 sm:border-[8px] sm:border-[#1E1B18] flex flex-col justify-between" data-purpose="mobile-viewport">
+<!-- BEGIN: TopBar -->
+<header class="pt-3 px-6 pb-2 relative z-20">
+<!-- iOS Status Bar Simulation -->
+<div class="flex justify-between items-center text-xs font-semibold tracking-tight text-neutral-800 mb-3" data-purpose="ios-status-bar">
+<span class="">9:41</span>
+<!-- Dynamic Island Placeholder -->
+<div class="w-24 h-5 bg-black rounded-full mx-auto -mt-1 hidden sm:block"></div>
+<div class="flex items-center gap-1.5">
+<!-- Signal Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25c-.2.2-.2.51 0 .71.2.2.51.2.71 0l.64-.64C7.24 19.34 9.49 20 12 20s4.76-.66 6.3-1.68l.64.64c.2.2.51.2.71 0 .2-.2.2-.51 0-.71l-.62-.64C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"></path></svg>
+<!-- Wifi -->
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0012 4z"></path></svg>
+<!-- Battery -->
+<div class="w-5 h-2.5 border border-black rounded-sm p-0.5 flex items-center">
+<div class="w-full h-full bg-black rounded-2xs"></div>
+</div>
+</div>
+</div>
+<!-- Navigation & Setup Progress Indicator -->
+<div class="flex items-center justify-between mt-2" data-purpose="step-indicator-bar">
+<a aria-label="Go back" class="w-9 h-9 rounded-full bg-white/80 border border-neutral-200/70 flex items-center justify-center text-neutral-700 shadow-sm active:scale-95 transition-transform" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</a>
+<!-- Step Pill Indicator matching reference badges -->
+<div class="flex items-center gap-1.5 bg-white/80 border border-neutral-200/80 px-3.5 py-1.5 rounded-full shadow-pill">
+<span class="text-[11px] font-bold tracking-wide uppercase text-neutral-500">Step 1 of 2</span>
+<span class="inline-block w-1 h-1 rounded-full bg-neutral-300"></span>
+<span class="text-[11px] font-bold text-amber-700 bg-amber-100/90 px-2 py-0.5 rounded-full">50% Setup</span>
+</div>
+<!-- Help / Support Button -->
+<button aria-label="Support info" class="w-9 h-9 rounded-full bg-white/80 border border-neutral-200/70 flex items-center justify-center text-neutral-700 shadow-sm" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</button>
+</div>
+</header>
+<!-- END: TopBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 px-5 pt-2 pb-6 hero-gradient-wash">
+<!-- Screen Header with Editorial Typography -->
+<section class="mt-2 mb-4" data-purpose="screen-heading">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FCE7F0] text-[#B8326D] text-[11px] font-bold tracking-wide mb-2">
+<span class="">PORTAL VERIFICATION</span>
+<span class="">✦</span>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tight text-[#1E1B18] leading-tight">
+          Candidate Profile
+        </h1>
+<p class="text-neutral-600 text-xs sm:text-sm mt-1 leading-relaxed">
+          Verify your university credentials before entering the timed exam room.
+        </p>
+</section>
+<!-- Authenticated Google User Banner -->
+<div class="bg-white/95 rounded-2xl p-3 border border-neutral-200/70 shadow-soft mb-5 flex items-center justify-between" data-purpose="authenticated-account-banner">
+<div class="flex items-center gap-3">
+<!-- Student Avatar Pill with cute pastel halo -->
+<div class="relative w-11 h-11 rounded-full bg-gradient-to-tr from-amber-200 to-rose-200 p-0.5">
+<div class="w-full h-full rounded-full bg-neutral-900 flex items-center justify-center text-white font-bold text-sm tracking-tight overflow-hidden">
+<span class="">AM</span>
+</div>
+<!-- Online status mint dot -->
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold text-neutral-900">alex.morgan@university.edu</span>
+<span class="text-emerald-700 bg-emerald-100 rounded-full p-0.5" title="Verified Google Account">
+<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path>
+</svg>
+</span>
+</div>
+<p class="text-[11px] text-neutral-500">Google Workspace Single Sign-On</p>
+</div>
+</div>
+<button class="text-[11px] font-semibold text-neutral-500 hover:text-neutral-800 bg-neutral-100 px-2.5 py-1.5 rounded-lg border border-neutral-200" type="button">
+          Switch
+        </button>
+</div>
+<!-- BEGIN: StudentDetailsForm -->
+<form action="#" class="space-y-3.5" data-purpose="student-details-form" method="POST">
+<!-- Field 1: Full Legal Name -->
+<div class="bg-white rounded-2xl p-3.5 border border-neutral-200/80 shadow-soft">
+<label class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1" for="fullName">
+            Full Legal Name
+          </label>
+<div class="relative flex items-center"><input class="w-full text-sm font-bold text-neutral-900 bg-neutral-50/70 border border-neutral-200 rounded-xl px-3 py-2 focus:bg-white focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 outline-none transition-colors" id="fullName" name="fullName" placeholder="Enter full legal name" type="text" value="Alex Morgan"></div>
+
+</div>
+<!-- Field 2: Matriculation / Roll No. -->
+<div class="bg-white rounded-2xl p-3.5 border border-neutral-200/80 shadow-soft">
+<div class="flex justify-between items-center mb-1">
+<label class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500" for="matriculationNo">Roll No.
+            </label>
+<span class="text-[10px] bg-sky-100 text-sky-800 font-semibold px-2 py-0.5 rounded-md">Required</span>
+</div>
+<div class="relative flex items-center">
+<input class="w-full text-sm font-bold text-neutral-900 bg-neutral-50/70 border border-neutral-200 rounded-xl px-3 py-2 focus:bg-white focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 outline-none transition-colors" id="matriculationNo" name="matriculationNo" placeholder="e.g. CS-2022-0894" type="text" value="CS-2022-0894">
+</div>
+<div class="flex items-center gap-1 mt-1.5 text-[10px] text-neutral-500">
+
+
+</div>
+</div>
+<!-- Field 3: Degree & Major Dropdown -->
+<div class="bg-white rounded-2xl p-3.5 border border-neutral-200/80 shadow-soft">
+<label class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1" for="degreeMajor">
+            Degree &amp; Major
+          </label>
+<div class="relative">
+<select class="w-full appearance-none text-sm font-semibold text-neutral-800 bg-neutral-50/70 border border-neutral-200 rounded-xl px-3 py-2.5 pr-8 focus:bg-white focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 outline-none transition-colors" id="degreeMajor" name="degreeMajor">
+<option selected="" value="bs_cs">B.S. Computer Science</option>
+<option value="bs_se">B.S. Software Engineering</option>
+<option value="bs_ds">B.S. Data Science &amp; Analytics</option>
+<option value="ms_cs">M.S. Computer Science</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-neutral-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Field 4: Academic Department -->
+
+<!-- Field 5: Batch & Cohort Dropdown -->
+
+<!-- Academic Integrity Pledge Card (Pastel Lavender / Blue Tint Card) -->
+<div class="bg-gradient-to-br from-[#EDE9FE] to-[#F1EAFF] rounded-2xl p-4 border border-[#DDD6FE] shadow-sm mt-4" data-purpose="honor-code-pledge">
+<div class="flex items-start gap-3">
+<div class="pt-0.5">
+<input checked="" class="w-5 h-5 rounded-lg text-purple-700 bg-white border-purple-300 focus:ring-purple-400 focus:ring-offset-0 cursor-pointer" id="pledge" name="pledge" type="checkbox">
+</div>
+<label class="text-xs text-neutral-800 leading-snug cursor-pointer select-none" for="pledge">
+<span class="font-bold block text-purple-950 mb-0.5">Academic Integrity Pledge</span>
+              I confirm that my credentials are valid and agree to the University Honor Code during timed assessments.
+            </label>
+</div>
+</div>
+<!-- Primary Action Button -->
+<div class="pt-2">
+<button class="w-full bg-[#1E1B18] hover:bg-black text-white font-bold py-4 px-6 rounded-full shadow-cta flex items-center justify-center gap-2 text-sm tracking-wide transition-all transform active:scale-[0.98]" type="submit">
+<span class="">Save &amp; Continue to Exams</span>
+<span class="text-base">→</span>
+</button>
+</div>
+</form>
+<!-- END: StudentDetailsForm -->
+<!-- Micro-footer: Safe Exam Session Indicator -->
+<footer class="mt-4 pt-1 flex items-center justify-center gap-2 text-[11px] text-neutral-500" data-purpose="security-session-footer">
+<svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+</svg>
+<span class="font-medium">Encrypted SSL Session • Proctor Guard Active</span>
+</footer>
+<!-- iOS Home Indicator bar -->
+<div class="w-32 h-1 bg-neutral-300 rounded-full mx-auto mt-4"></div>
+</main>
+<!-- END: MainContent -->
+</div>
+<!-- Client-side Interaction Script -->
+<script data-purpose="form-interactivity">
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const pledgeCheckbox = document.getElementById('pledge');
+          if (!pledgeCheckbox.checked) {
+            alert('Please accept the Academic Integrity Pledge to proceed.');
+            return;
+          }
+          // Friendly feedback demonstration
+          const btn = form.querySelector('button[type="submit"]');
+          btn.innerHTML = `<span>Saving Details...</span>`;
+          setTimeout(() => {
+            btn.innerHTML = `<span>Redirecting to Exam Lobby ✓</span>`;
+            btn.classList.remove('bg-[#1E1B18]');
+            btn.classList.add('bg-emerald-700');
+          }, 600);
+        });
+      }
+    });
+  </script>
+
+
+</body></html>
