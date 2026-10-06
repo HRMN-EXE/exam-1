@@ -85,6 +85,28 @@ def body_parts(s):
     scripts = re.findall(r'<script\b.*?</script>', body, re.S)
     return chunks, scripts
 
+def dedup_attrs(ch):
+    """Remove duplicate attributes within a single tag (keep first occurrence)."""
+    def fix(m):
+        tag = m.group(0)
+        seen, out, pos = set(), [], 0
+        head = re.match(r'<\w+', tag).group(0)
+        out.append(head); pos = len(head)
+        for am in re.finditer(r'\s+([\w:@\-\.]+)(?:="[^"]*"|=\'[^\']*\'|=[^\s>]+)?', tag[pos:-1]):
+            name = am.group(1)
+            if name in seen:
+                continue
+            seen.add(name)
+            out.append(am.group(0))
+        tail = tag[-1]  # '>' or '/>'
+        return ''.join(out) + ('/>' if tag.endswith('/>') else '>')
+    return re.sub(r'<[a-zA-Z][^>]*?(/?>)', fix, ch)
+
+def strip_dup_ids(html):
+    """Drop id="..." on the very first <header> of a screen whose section already
+    carries that id pattern — not needed; kept as identity."""
+    return html
+
 def prefix_scope(css, scope):
     out = []
     i, n = 0, len(css)
@@ -193,13 +215,14 @@ for key in ORDER:
         classes = cls_m.group(1) if cls_m else ''
         if not plain or 'snapdom' in classes or 'fixed inset-0' in classes:
             continue  # empty helpers / sandboxes / decorative overlays
-        # keep only the first meaningful container per screen
-        if content:
-            break
+        # skip tiny helper divs (e.g. 179-byte snapdom clones) with no visible text
+        if len(ch.strip()) < 260 and not plain:
+            continue
         # neutralise viewport-fixed positioning so it lives inside the phone frame
         ch2 = re.sub(r'\bfixed\b', 'sticky', ch)
         ch2 = re.sub(r'\bmin-h-screen\b', 'min-h-full', ch2)
         ch2 = re.sub(r'\bh-screen\b', 'h-full', ch2)
+        ch2 = dedup_attrs(ch2)
         content.append(ch2)
 
     scope = f'#screen-{nav_id}'
@@ -211,15 +234,18 @@ for key in ORDER:
         all_css.append(f'/* ---- {key} ---- */\n{scoped}')
 
     inner = '\n'.join(content)
-    # collect body scripts that were NOT already inside the kept chunk
+    # collect body scripts that were NOT already inside a kept chunk
     kept_html = re.sub(r'<script\b.*?</script>', '', inner, flags=re.S)
+    def norm(s):
+        return re.sub(r'\s+', ' ', s)
+    norm_inner = norm(inner)
     leftover_scripts = []
     for sc in scripts:
         core = re.search(r'>(.*)</script>', sc, re.S)
         snippet = (core.group(1).strip()[:80] if core else '')
         if 'snapdom' in sc.lower():
             continue
-        if snippet and snippet not in kept_html and snippet[:40] not in inner:
+        if snippet and norm(snippet) not in norm_inner:
             leftover_scripts.append(sc)
     screens_html.append(
         f'<!-- ===== {key}: {title} ===== -->\n'
@@ -239,6 +265,315 @@ for a, b, label in FLOW:
     flow_map.setdefault(a, []).append((b, label))
 flow_json = {a: [{'to': b, 'label': lb} for b, lb in v] for a, v in flow_map.items()}
 
+# ---------- wire the screens into a real app: routing + state + toasts ----
+WIRING_JS = r"""
+<script data-purpose="app-wiring">
+(function () {
+  'use strict';
+
+  /* --- toast system ---------------------------------------------------- */
+  var box = document.createElement('div');
+  box.id = 'ep-toasts';
+  document.body.appendChild(box);
+  window.epToast = function (msg, ms) {
+    var t = document.createElement('div');
+    t.className = 'ep-toast';
+    t.textContent = msg;
+    box.appendChild(t);
+    requestAnimationFrame(function () { t.classList.add('show'); });
+    setTimeout(function () {
+      t.classList.remove('show');
+      setTimeout(function () { t.remove(); }, 350);
+    }, ms || 2400);
+  };
+
+  /* --- friendly replacements for legacy alerts -------------------------- */
+  window.alert = function (msg) { epToast(String(msg).replace(/^Proceeding to Screen 4: /, '')); };
+  window.confirm = function (msg) { epToast(msg); return true; };
+
+  /* --- persistent session store ----------------------------------------- */
+  var KEY = 'examportal.session.v1';
+  var DEFAULTS = { role: null, student: null, faculty: null, answers: {},
+                   flagged: {}, examStartedAt: null, submitted: null,
+                   draftExam: null, published: [] };
+  var S;
+  try { S = JSON.parse(localStorage.getItem(KEY) || 'null') || {}; } catch (e) { S = {}; }
+  for (var k in DEFAULTS) if (!(k in S)) S[k] = DEFAULTS[k];
+  function saveS() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  window.EP = { get state() { return S; }, save: saveS,
+    reset: function () {
+      S = JSON.parse(JSON.stringify(DEFAULTS)); saveS();
+      epToast('Demo session cleared'); showScreen('student-login', false);
+    } };
+
+  /* --- history-aware navigation (back/forward works like a real app) ----- */
+  var _show = window.showScreen;
+  window.showScreen = function (id, pushHistory) {
+    var prev = current;
+    _show(id, pushHistory);
+    if (pushHistory !== false && prev && prev !== id) {
+      try { history.pushState({ s: id }, '', '#' + id); } catch (e) {}
+    }
+  };
+  window.addEventListener('popstate', function (ev) {
+    var id = (ev.state && ev.state.s) || (location.hash || '').slice(1);
+    if (ORDER.indexOf(id) === -1) id = 'student-login';
+    if (id !== current) _show(id, false);
+  });
+
+  function byText(sel, needle) {
+    var els = document.querySelectorAll(sel);
+    for (var i = 0; i < els.length; i++) {
+      if ((els[i].textContent || '').indexOf(needle) !== -1) return els[i];
+    }
+    return null;
+  }
+  function on(el, type, fn) { if (el) el.addEventListener(type, fn); }
+
+  /* --- keep modals inside their own screen + proper show/hide for the
+         bottom-sheet review modal (its class list has flex-col but no flex) -- */
+  var _show = window.showScreen;
+  window.showScreen = function (id, pushHistory) {
+    var prevEl = current ? document.getElementById('screen-' + current) : null;
+    if (prevEl) prevEl.querySelectorAll('.fixed.inset-0').forEach(function (m) {
+      m.classList.add('hidden'); m.classList.remove('flex');
+    });
+    _show(id, pushHistory);
+    var el = document.getElementById('screen-' + id);
+    if (el) el.querySelectorAll('.fixed.inset-0:not(.hidden)').forEach(function (m) {
+      if (/\bflex-col\b/.test(m.className)) m.classList.add('flex');
+    });
+  };
+  var _oss = window.openSubmitSummary;
+  window.openSubmitSummary = function () {
+    if (_oss) _oss();
+    var m = document.getElementById('review-modal');
+    if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+  };
+  var _css = window.closeSubmitSummary;
+  window.closeSubmitSummary = function () {
+    if (_css) _css();
+    var m = document.getElementById('review-modal');
+    if (m) { m.classList.add('hidden'); m.classList.remove('flex'); }
+  };
+
+  /* ================= STUDENT LOGIN ====================================== */
+  var googleBtn = byText('#screen-student-login button', 'Sign in with Google');
+  on(googleBtn, 'click', function () {
+    googleBtn.disabled = true;
+    epToast('Verifying institutional account\u2026');
+    setTimeout(function () {
+      googleBtn.disabled = false;
+      S.role = 'student';
+      if (!S.student) S.student = { name: 'Alex Rivera', id: 'STU-2026-0417' };
+      saveS();
+      showScreen('student-profile');
+    }, 900);
+  });
+  on(document.querySelector('#screen-student-login a[href="#faculty-login"]'), 'click',
+     function (e) { e.preventDefault(); showScreen('faculty-login'); });
+
+  /* ================= CANDIDATE PROFILE =================================== */
+  var profileForm = document.querySelector('#screen-student-profile form');
+  if (profileForm) {
+    profileForm.querySelectorAll('input, select, textarea').forEach(function (inp) {
+      var key = inp.name || inp.id;
+      if (S.student && inp.type !== 'checkbox' && key && S.student[key] != null)
+        inp.value = S.student[key];
+    });
+    profileForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var pledge = document.getElementById('pledge');
+      if (pledge && !pledge.checked) { epToast('Please accept the Academic Integrity Pledge first.'); return; }
+      var data = {};
+      profileForm.querySelectorAll('input, select, textarea').forEach(function (inp) {
+        if (inp.type === 'checkbox' || inp.type === 'radio') return;
+        var key = inp.name || inp.id;
+        if (key) data[key] = inp.value;
+      });
+      S.student = Object.assign({}, S.student || {}, data);
+      saveS();
+      epToast('Profile saved \u2713');
+      showScreen('student-exams');
+    });
+  }
+
+  /* ================= EXAM LIST =========================================== */
+  window.handleTakeExam = function (code) {
+    epToast(code + ' selected \u2014 loading rules & confirmation');
+    setTimeout(function () { showScreen('student-rules'); }, 450);
+  };
+  on(document.querySelector('#screen-student-exams button[aria-label="Notifications"]'),
+     'click', function () {
+       epToast(S.submitted ? 'Result ready: CS301 \u2014 view your receipt' : 'No new notifications');
+     });
+
+  /* ================= RULES =============================================== */
+  var startBtn = document.getElementById('startExamBtn');
+  on(startBtn, 'click', function () {
+    if (startBtn.hasAttribute('disabled')) return;
+    S.examStartedAt = Date.now();
+    S.answers = {}; S.flagged = {}; S.submitted = null;
+    saveS();
+    epToast('Secure session started \u00b7 good luck! \u2728');
+    showScreen('student-exam');
+  });
+
+  /* ================= ACTIVE EXAM ========================================= */
+  var timerEl = byText('#screen-student-exam span', 'Remaining');
+  var remaining = 24 * 60 + 45;
+  var lastTick = Date.now();
+  setInterval(function () {
+    if (!S.examStartedAt || S.submitted) return;
+    var now = Date.now();
+    while (now - lastTick >= 1000 && remaining > 0) { lastTick += 1000; remaining--; }
+    if (timerEl) {
+      var m = String(Math.floor(remaining / 60)).padStart(2, '0');
+      var s = String(remaining % 60).padStart(2, '0');
+      timerEl.textContent = m + ':' + s + ' Remaining';
+    }
+    if (remaining <= 0) {
+      S.submitted = { at: now, auto: true, code: 'CS301' };
+      saveS();
+      epToast('Time expired \u2014 submitting automatically\u2026', 3000);
+      setTimeout(function () { showScreen('student-timeup'); }, 600);
+    }
+  }, 500);
+
+  var _selectOption = window.selectOption;
+  window.selectOption = function (btn) {
+    if (_selectOption) _selectOption(btn);
+    var ind = btn.querySelector('.indicator');
+    S.answers['Q14:' + (ind ? ind.textContent.trim() : '?')] = true;
+    saveS();
+  };
+  var _toggleFlag = window.toggleFlag;
+  window.toggleFlag = function () {
+    if (_toggleFlag) _toggleFlag();
+    var ic = document.querySelector('#flag-btn .material-symbols-outlined');
+    S.flagged.Q14 = !!ic && ic.textContent.trim() === 'bookmark';
+    saveS();
+  };
+  // question navigator chips (Q1..Q20)
+  document.querySelectorAll('#screen-student-exam button').forEach(function (b) {
+    var t = (b.textContent || '').trim();
+    if (/^Q\d+$/.test(t)) on(b, 'click', function () { epToast('Jumped to ' + t + ' (demo shows Q14)'); });
+  });
+  on(byText('#screen-student-exam button', 'Next\u00a0'), 'click', function () {
+    epToast('Question 15 of 40 (demo content is Q14)');
+  });
+  on(byText('#screen-student-exam button', 'Confirm & End'), 'click', function () {
+    S.submitted = { at: Date.now(), auto: false, code: 'CS301' };
+    S.examStartedAt = null;
+    saveS();
+    epToast('Answers sealed & encrypted \u2713');
+    showScreen('student-done');
+  });
+
+  /* ================= DISCONNECT ========================================== */
+  on(byText('#screen-student-disconnect button', 'Retry Connection Now'), 'click', function () {
+    setTimeout(function () {
+      epToast('Connection restored \u2713');
+      showScreen('student-exam');
+    }, 1400);
+  });
+  on(byText('#screen-student-disconnect button', 'Diagnose Wi-Fi'), 'click', function () {
+    epToast('Wi-Fi check complete: signal OK, server reachable');
+  });
+
+  /* ================= TIME UP ============================================= */
+  var finBtn = byText('#screen-student-timeup button', 'Finalizing Submission');
+  if (finBtn) {
+    var doneTimer = setInterval(function () {
+      var fill = document.getElementById('action-progress-fill');
+      if (!fill) return;
+      var w = parseFloat(fill.style.width) || 95;
+      w = Math.min(100, w + 1);
+      fill.style.width = w + '%';
+      if (w >= 100) {
+        clearInterval(doneTimer);
+        finBtn.disabled = false;
+        finBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">receipt_long</span>' +
+                           '<span>View Submission Receipt</span>';
+        finBtn.removeAttribute('style');
+        epToast('Receipt generated \u2713');
+      }
+    }, 220);
+    on(finBtn, 'click', function () {
+      if (finBtn.disabled) return;
+      showScreen('student-done');
+    });
+  }
+
+  /* ================= RECEIPT ============================================= */
+  on(byText('#screen-student-done button', 'Return to Exam Dashboard'), 'click', function () {
+    showScreen('student-exams');
+  });
+
+  /* ================= FACULTY LOGIN ======================================= */
+  function facAuthed() {
+    S.role = 'faculty';
+    if (!S.faculty) S.faculty = { name: 'Dr. Morgan', email: 'morgan@univ.edu' };
+    saveS();
+    epToast('Welcome back \u2014 opening dashboard');
+    setTimeout(function () { showScreen('faculty-new-exam'); }, 600);
+  }
+  on(byText('#screen-faculty-login button', 'Institutional Google SSO'), 'click', facAuthed);
+  var facForm = document.querySelector('#screen-faculty-login form');
+  if (facForm) facForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pw = document.getElementById('faculty-password');
+    if (pw && !pw.value) { epToast('Enter your password or use SSO'); return; }
+    facAuthed();
+  });
+
+  /* ================= FACULTY DASHBOARD ==================================== */
+  on(byText('#screen-faculty-new-exam button', 'Edit Exam Configuration'), 'click', function () {
+    epToast('Editing configuration \u2014 step 1: basics');
+    showScreen('faculty-basics');
+  });
+  on(byText('#screen-faculty-new-exam button', 'Save Draft'), 'click', function () {
+    S.draftExam = S.draftExam || { title: 'CS301 Final', draft: true };
+    saveS();
+    epToast('Draft saved locally \u2713');
+  });
+  on(byText('#screen-faculty-new-exam button', 'Step 3: Proctor'), 'click', function () {
+    epToast('Opening proctor & security settings');
+    showScreen('faculty-proctor');
+  });
+
+  /* ================= BASICS ============================================== */
+  on(byText('#screen-faculty-basics button', 'Step 2: Questions'), 'click', function () {
+    var first = document.querySelector('#screen-faculty-basics input');
+    S.draftExam = { title: (first && first.value) || 'Untitled exam', step: 2 };
+    saveS();
+    epToast('Basics saved \u2713');
+    showScreen('faculty-new-exam');
+  });
+  on(byText('#screen-faculty-basics button', 'Save Draft'), 'click', function () {
+    saveS(); epToast('Draft saved locally \u2713');
+  });
+
+  /* ================= PROCTOR ============================================= */
+  on(byText('#screen-faculty-proctor button', 'Publish Exam'), 'click', function () {
+    S.published = S.published || [];
+    S.published.push({ title: (S.draftExam && S.draftExam.title) || 'CS301 Final', at: Date.now() });
+    saveS();
+    epToast('Examination published \u00b7 access key activated \u2713');
+    showScreen('faculty-grading');
+  });
+  on(byText('#screen-faculty-proctor button', 'Questions'), 'click', function () {
+    showScreen('faculty-new-exam');
+  });
+
+  /* ================= GRADING ============================================= */
+  on(byText('#screen-faculty-grading button', 'Publish Grades'), 'click', function () {
+    epToast('Grades released to the gradebook \u2713');
+  });
+})();
+</script>
+"""
+
 html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -257,6 +592,14 @@ html = f"""<!DOCTYPE html>
 }}
 * {{ box-sizing:border-box; }}
 ::-webkit-scrollbar {{ display:none; }}
+.pt-safe {{ padding-top:env(safe-area-inset-top,0px); }}
+.pb-safe {{ padding-bottom:env(safe-area-inset-bottom,0px); }}
+.screen-scroll main > *:first-child {{ margin-top:0 !important; }}
+.screen-scroll main > *:last-child {{ margin-bottom:0 !important; }}
+#screen-student-exam .option-pill.active-option {{
+  background:#f0dbff !important; color:#2c0051 !important;
+  box-shadow:0 1px 3px rgba(0,0,0,.12);
+}}
 html, body {{
   height:100%;
   background:#171412;
