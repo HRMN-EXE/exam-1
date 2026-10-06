@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<meta name="theme-color" content="#fff8f5">
+<title>ExamPortal — Student &amp; Faculty Mobile App</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  "darkMode": "class",
+  "theme": {
+    "extend": {
+      "colors": {
+        "pastelPink": "#FFD4DE",
+        "pastelYellow": "#FFEBA4",
+        "pastelPeach": "#FED7AA",
+        "pastelLavender": "#E9D5FF",
+        "pastelMint": "#D1FAE5",
+        "ink": "#1C1917",
+        "charcoal": "#1F1E1B",
+        "soft-card": "0 12px 35px -8px rgba(180, 130, 90, 0.12), 0 4px 12px -2px rgba(180, 130, 90, 0.06)",
+        "button-pop": "0 8px 20px -4px rgba(230, 80, 120, 0.25)",
+        "pill-glow": "0 4px 14px -2px rgba(251, 146, 60, 0.15)",
+        "cream": "#FAF7F2",
+        "creamSoft": "#F6F2EB",
+        "muted": "#7A766F",
+        "accentPink": "#FCE7F0",
+        "accentPinkDark": "#E06596",
+        "accentYellow": "#FEF3C7",
+        "accentYellowDark": "#D97706",
+        "accentBlue": "#E0F2FE",
+        "accentBlueDark": "#0284C7",
+        "accentLavender": "#EDE9FE",
+        "accentLavenderDark": "#7C3AED",
+        "accentMint": "#DCFCE7",
+        "accentMintDark": "#15803D",
+        "coralCta": "#1E1B18",
+        "3xl": "24px",
+        "4xl": "32px",
+        "soft": "0 8px 30px rgba(0, 0, 0, 0.04)",
+        "pill": "0 2px 10px rgba(0, 0, 0, 0.03)",
+        "cta": "0 12px 25px -4px rgba(30, 27, 24, 0.25)",
+        "surface-container-highest": "#e9e1dd",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary": "#ffffff",
+        "background": "#fff8f5",
+        "on-secondary-container": "#726200",
+        "surface-variant": "#e9e1dd",
+        "secondary-fixed-dim": "#e2c62d",
+        "on-secondary": "#ffffff",
+        "surface-dim": "#e0d8d5",
+        "surface-container-low": "#faf2ee",
+        "on-error-container": "#93000a",
+        "outline-variant": "#dac0c9",
+        "surface-container-high": "#eee7e3",
+        "on-tertiary-fixed-variant": "#62259b",
+        "surface": "#fff8f5",
+        "primary-fixed": "#ffd8e7",
+        "on-surface-variant": "#544249",
+        "primary-container": "#f472b6",
+        "on-surface": "#1e1b19",
+        "on-primary-container": "#6d0047",
+        "primary-fixed-dim": "#ffafd3",
+        "error": "#ba1a1a",
+        "on-primary-fixed-variant": "#85145a",
+        "primary": "#a43073",
+        "secondary": "#6d5e00",
+        "on-tertiary-container": "#500989",
+        "tertiary-fixed": "#f0dbff",
+        "tertiary-container": "#c084fc",
+        "on-secondary-fixed-variant": "#524600",
+        "surface-container": "#f4ece8",
+        "error-container": "#ffdad6",
+        "on-primary": "#ffffff",
+        "inverse-primary": "#ffafd3",
+        "on-error": "#ffffff",
+        "inverse-on-surface": "#f7efeb",
+        "inverse-surface": "#33302d",
+        "outline": "#87717a",
+        "secondary-container": "#fcdf46",
+        "tertiary-fixed-dim": "#ddb8ff",
+        "tertiary": "#7b41b4",
+        "secondary-fixed": "#ffe24c",
+        "on-secondary-fixed": "#211b00",
+        "surface-tint": "#a43073",
+        "surface-bright": "#fff8f5",
+        "on-background": "#1e1b19",
+        "on-primary-fixed": "#3d0026",
+        "on-tertiary-fixed": "#2c0051"
+      },
+      "borderRadius": {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "margin-mobile": "1rem",
+        "gutter-mobile": "0.75rem",
+        "space-md": "1rem",
+        "space-sm": "0.5rem",
+        "space-lg": "1.5rem",
+        "gutter": "1rem",
+        "space-xs": "0.25rem",
+        "margin": "1.5rem",
+        "space-xl": "2rem"
+      },
+      "fontFamily": {
+        "headline-lg": [
+          "Plus Jakarta Sans"
+        ],
+        "headline-md": [
+          "Plus Jakarta Sans"
+        ],
+        "label-lg": [
+          "Plus Jakarta Sans"
+        ],
+        "body-md": [
+          "Plus Jakarta Sans"
+        ],
+        "label-sm": [
+          "Plus Jakarta Sans"
+        ],
+        "headline-lg-mobile": [
+          "Plus Jakarta Sans"
+        ],
+        "headline-xl": [
+          "Plus Jakarta Sans"
+        ],
+        "headline-xl-mobile": [
+          "Plus Jakarta Sans"
+        ],
+        "body-lg": [
+          "Plus Jakarta Sans"
+        ],
+        "label-md": [
+          "Plus Jakarta Sans"
+        ]
+      },
+      "fontSize": {
+        "headline-lg": [
+          "32px",
+          {
+            "lineHeight": "40px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-md": [
+          "20px",
+          {
+            "lineHeight": "28px",
+            "fontWeight": "700"
+          }
+        ],
+        "label-lg": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-md": [
+          "15px",
+          {
+            "lineHeight": "22px",
+            "fontWeight": "400"
+          }
+        ],
+        "label-sm": [
+          "10px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.04em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-lg-mobile": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-xl": [
+          "40px",
+          {
+            "lineHeight": "48px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ],
+        "headline-xl-mobile": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "800"
+          }
+        ],
+        "body-lg": [
+          "17px",
+          {
+            "lineHeight": "26px",
+            "fontWeight": "500"
+          }
+        ],
+        "label-md": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.02em",
+            "fontWeight": "600"
+          }
+        ]
+      }
+    }
+  }
+};
+</script>
+<style>
+@layer base {
+  html, body { width:100%; height:100%; margin:0; padding:0; overscroll-behavior:none; }
+}
+* { box-sizing:border-box; }
+::-webkit-scrollbar { display:none; }
+html, body {
+  height:100%;
+  background:#171412;
+  font-family:'Plus Jakarta Sans', system-ui, sans-serif;
+  color:#1E1B18;
+  overflow:hidden;
+}
+#app {
+  position:relative;
+  width:100%;
+  max-width:430px;
+  height:100dvh;
+  margin:0 auto;
+  background:#fff8f5;
+  overflow:hidden;
+}
+@media (min-width:480px) {
+  body { display:flex; align-items:center; justify-content:center; }
+  #app { height:min(92dvh, 932px); border-radius:44px; border:8px solid #2b2724;
+         box-shadow:0 30px 80px rgba(0,0,0,.55); }
+}
+/* app bar */
+#appbar {
+  position:sticky; top:0; z-index:80;
+  display:flex; align-items:center; gap:10px;
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;
+  background:rgba(255,248,245,.85); backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(30,27,24,.06);
+}
+#appbar .ab-title { font-weight:800; font-size:16px; letter-spacing:-.02em; flex:1; min-width:0;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#appbar button { border:0; background:transparent; color:inherit; cursor:pointer;
+  width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+#appbar button:active { background:rgba(30,27,24,.08); }
+#brand-chip { font-size:11px; font-weight:800; letter-spacing:.08em; padding:4px 10px; border-radius:999px;
+  background:#1E1B18; color:#fff8f5; }
+/* screens */
+.screen { display:none; position:absolute; inset:0; top:0; }
+.screen.active { display:block; animation:fadein .28s ease; }
+@keyframes fadein { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+.screen-scroll { height:100%; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-top:58px;
+  scrollbar-width:none; }
+.screen-scroll > *:first-child { margin-top:0 !important; }
+/* bottom tab bar */
+#tabbar {
+  position:absolute; left:0; right:0; bottom:0; z-index:90;
+  display:flex; justify-content:space-around; align-items:stretch;
+  padding:6px 6px calc(env(safe-area-inset-bottom,0px) + 6px);
+  background:rgba(255,252,250,.92); backdrop-filter:blur(18px);
+  border-top:1px solid rgba(30,27,24,.07);
+  box-shadow:0 -6px 24px rgba(0,0,0,.06);
+}
+.nav-btn { flex:1; border:0; background:transparent; cursor:pointer; display:flex; flex-direction:column;
+  align-items:center; gap:2px; padding:6px 2px; border-radius:14px; color:#8a817b;
+  font-family:inherit; font-size:10px; font-weight:700; letter-spacing:.01em; }
+.nav-btn .material-symbols-outlined { font-size:22px; }
+.nav-btn.active { color:#fff8f5; background:#1E1B18; }
+/* next-flow pill */
+#next-pill {
+  position:absolute; right:14px; bottom:86px; z-index:95;
+  display:none; gap:8px; flex-direction:column; align-items:flex-end;
+}
+#next-pill.show { display:flex; }
+#next-pill button {
+  border:0; cursor:pointer; font-family:inherit; font-weight:800; font-size:13px;
+  padding:12px 18px; border-radius:999px; color:#fff8f5; background:#6750A4;
+  box-shadow:0 8px 22px rgba(103,80,164,.45); display:flex; align-items:center; gap:6px;
+}
+#next-pill button.alt { background:#1E1B18; box-shadow:0 8px 22px rgba(0,0,0,.35); }
+#next-pill button .material-symbols-outlined { font-size:18px; }
+/* ---- code1 ---- */
+#screen-student-login /* Subtle background mesh gradient inspired by the reference screens */
+    .bg-mesh-warmth {
+      background: radial-gradient(circle at 10% 15%, rgba(254, 240, 138, 0.55) 0%, transparent 45%),
+                  radial-gradient(circle at 90% 25%, rgba(253, 164, 175, 0.5) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 90%, rgba(254, 215, 170, 0.45) 0%, transparent 50%),
+                  #FFF8EE;
+    }
+#screen-student-login /* Dynamic Island notch safe area compensation */
+    .ios-status-bar {
+      height: 48px;
+    }
+/* ---- code2 ---- */
+#screen-student-profile {
+      background-color: #ECE7DE;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+#screen-student-profile /* Device frame wrapper to match 390px iPhone mobile viewport request */
+    .mobile-screen-container {
+      width: 100%;
+      max-width: 390px;
+      min-height: 844px;
+      margin: 0 auto;
+      background-color: #FAF7F2;
+      position: relative;
+      overflow-x: hidden;
+    }
+/* ---- code2 ---- */
+#screen-student-profile /* Subtle organic warm pastel gradient top wash seen in reference artwork */
+    .hero-gradient-wash {
+      background: radial-gradient(circle at 10% 0%, #FFE8E5 0%, transparent 45%),
+                  radial-gradient(circle at 95% 5%, #FEF3C7 0%, transparent 50%),
+                  radial-gradient(circle at 50% 15%, #F5E8FF 0%, transparent 40%);
+    }
+/* ---- code8 ---- */
+#screen-student-disconnect {
+      min-height: max(884px, 100dvh);
+    }
+/* ---- code9 ---- */
+#screen-student-timeup {
+      min-height: max(884px, 100dvh);
+    }
+/* ---- code10 ---- */
+#screen-faculty-login {
+      min-height: max(884px, 100dvh);
+    }
+/* ---- code11 ---- */
+#screen-faculty-new-exam {
+      min-height: max(884px, 100dvh);
+    }
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="appbar">
+    <button id="btn-back" type="button" aria-label="Back"><span class="material-symbols-outlined">arrow_back</span></button>
+    <span id="brand-chip">EXAMPORTAL</span>
+    <span class="ab-title" id="ab-title">Student Login</span>
+    <button id="btn-menu" type="button" aria-label="All screens"><span class="material-symbols-outlined">apps</span></button>
+  </header>
+
+  <!-- ===== code1: Student Login ===== -->
+<section id="screen-student-login" class="screen" data-title="Student Login" data-icon="login" aria-label="Student Login">
+<div class="screen-scroll"><main class="w-full max-w-[390px] min-h-full relative flex flex-col justify-between px-6 pb-8 overflow-hidden shadow-2xl bg-transparent">
+<!-- BEGIN: TopBarAndDynamicIsland -->
+<header class="w-full pt-3 pb-2 flex flex-col items-center" data-purpose="ios-top-bar">
+<!-- Simulated iOS Dynamic Island / Status Bar -->
+<div class="w-full flex justify-between items-center text-[13px] font-semibold tracking-tight text-ink/80 px-2 mb-2">
+<span class="">9:41</span>
+<div class="w-24 h-4 bg-ink/10 rounded-full flex items-center justify-center">
+<div class="w-10 h-2 bg-ink rounded-full"></div>
+</div>
+<div class="flex items-center space-x-1.5 text-xs">
+<!-- Signal Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+<path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z" opacity="0.3"></path>
+<path d="M12 6c-3.31 0-6 2.69-6 6 0 1.48.54 2.83 1.43 3.88L12 19l4.57-3.12C17.46 14.83 18 13.48 18 12c0-3.31-2.69-6-6-6z"></path>
+</svg>
+<!-- Wifi -->
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+<path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"></path>
+</svg>
+<!-- Battery -->
+<div class="w-5 h-2.5 border border-ink/70 rounded-sm p-0.5 flex items-center">
+<div class="w-full h-full bg-ink rounded-[1px]"></div>
+</div>
+</div>
+</div>
+<!-- Live Session Status Chip -->
+<div class="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-amber-200/60 shadow-xs">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span class="text-[11px] font-semibold uppercase tracking-wider text-charcoal/80">
+          Session Active <span class="text-charcoal/40 mx-0.5">•</span> Spring Midterms
+        </span>
+</div>
+</header>
+<!-- END: TopBarAndDynamicIsland -->
+<!-- BEGIN: BrandHeroSection -->
+<section class="mt-4 flex flex-col items-center text-center" data-purpose="brand-introduction">
+<!-- Playful Pastel Emblem Badge -->
+<div class="relative mb-4 group">
+<div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-amber-300 via-rose-300 to-orange-300 blur-md opacity-60"></div>
+<div class="relative w-18 h-18 p-4 rounded-3xl bg-white border border-white/80 shadow-md flex items-center justify-center">
+<svg class="w-10 h-10 text-amber-500" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0.5-.05"></path>
+<path d="M6 18h14"></path>
+<path d="M6 6h14"></path>
+<path d="M10 10l2 2 4-4"></path>
+</svg>
+<!-- Tiny playful star badge on emblem -->
+<div class="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-rose-400 text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
+            ★
+          </div>
+</div>
+</div>
+<!-- Main Display Typography -->
+<h1 class="text-[34px] leading-tight font-extrabold tracking-tight text-ink">
+        Exam<span class="text-rose-500 font-serif italic font-normal">Portal</span>
+</h1>
+<p class="text-sm font-medium text-charcoal/65 mt-1 tracking-tight">
+        Student Assessment &amp; Testing Platform
+      </p>
+</section>
+<!-- END: BrandHeroSection -->
+<!-- BEGIN: MainActionCard -->
+<section class="mt-6 flex-1 flex flex-col justify-center" data-purpose="auth-container">
+<div class="w-full bg-white/95 backdrop-blur-md rounded-3xl p-6 border border-stone-200/60 shadow-soft-card relative overflow-hidden">
+<!-- Decorative subtle top accent ribbon -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300"></div>
+<!-- Micro Tag -->
+<div class="flex items-center justify-between mb-3">
+
+
+</div>
+<!-- Instructional Guidance -->
+
+
+<!-- Divider with pill dot -->
+<div class="my-5 flex items-center justify-center gap-2">
+<div class="h-[1px] flex-1 bg-stone-100"></div>
+<span class="text-[10px] font-semibold text-stone-300 uppercase tracking-widest">Verify Identity</span>
+<div class="h-[1px] flex-1 bg-stone-100"></div>
+</div>
+<!-- Primary CTA: Google Login Button -->
+<button aria-label="Sign in with institutional Google account" class="w-full group relative flex items-center justify-center gap-3.5 bg-stone-900 hover:bg-stone-800 active:scale-[0.98] text-white py-3.5 px-5 rounded-2xl font-semibold text-[15px] shadow-button-pop transition-all duration-200" type="button">
+<!-- Google Official Multi-colored SVG -->
+<svg class="w-5 h-5 bg-white p-0.5 rounded-full shrink-0" viewBox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span class="tracking-tight">Sign in with Google</span>
+<!-- Small arrow pill indicator -->
+<span class="ml-auto w-6 h-6 rounded-full bg-stone-700 group-hover:bg-rose-500/80 flex items-center justify-center transition-colors">
+<svg class="w-3.5 h-3.5 text-stone-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</span>
+</button>
+<!-- Security & Validation Micro-chips -->
+<div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between gap-2">
+<!-- Chip 1: Supabase Encrypted -->
+<div class="flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200/50 px-2.5 py-1 rounded-xl text-[11px] font-medium">
+<svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" fill-rule="evenodd"></path>
+</svg>
+<span class="">Supabase Secured</span>
+</div>
+<!-- Chip 2: Anti-Cheating Session Lock -->
+<div class="flex items-center gap-1.5 bg-pink-50 text-rose-800 border border-rose-200/50 px-2.5 py-1 rounded-xl text-[11px] font-medium">
+<svg class="w-3 h-3 text-rose-500" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+</svg>
+<span class="">Single Session Locked</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: MainActionCard -->
+<!-- BEGIN: QuickRulesCard -->
+<!-- Playful informational callout reminiscent of reference cards -->
+<section class="mt-4 mb-2" data-purpose="guidelines-preview"><div class="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/80 backdrop-blur-sm border border-stone-200/60 shadow-xs hover:bg-white transition-all"><div class="flex items-center gap-2"><span class="flex items-center justify-center w-6 h-6 rounded-full bg-stone-100 text-stone-600 text-xs shrink-0">🎓</span><div class="flex flex-col text-left"><span class="text-[11px] font-semibold text-charcoal leading-tight">Are you a faculty member or proctor?</span><span class="text-[10px] text-stone-400 font-normal leading-tight">Access exam administration &amp; grading</span></div></div><a href="#faculty-login" class="inline-flex items-center gap-1 text-[11px] font-bold text-rose-500 hover:text-rose-600 transition-colors shrink-0"><span class="">Faculty Portal</span><span class="text-xs font-bold">→</span></a></div></section>
+<!-- END: QuickRulesCard -->
+<!-- BEGIN: FooterAssistance -->
+<footer class="mt-2 flex flex-col items-center gap-3" data-purpose="support-footer">
+<!-- Discreet Help Pill Button -->
+<a class="inline-flex items-center gap-2 bg-white/75 hover:bg-white border border-stone-200/80 text-charcoal px-4 py-2 rounded-full text-xs font-semibold shadow-xs transition-colors" href="#help-desk">
+<span class="text-stone-400">💬</span>
+<span class="">Need help? Contact Controller of Exams</span>
+</a>
+<!-- Institutional Disclaimer -->
+<p class="text-[10px] text-stone-600 tracking-tight text-center">
+        Academic Integrity Policy in effect. Unauthorised logins are logged &amp; monitored.
+      </p>
+<!-- iOS Home Bar Indicator -->
+<div class="w-32 h-1 bg-ink/20 rounded-full mt-1 mb-0.5"></div>
+</footer>
+<!-- END: FooterAssistance -->
+</main></div>
+
+</section><!-- ===== code2: Candidate Profile ===== -->
+<section id="screen-student-profile" class="screen" data-title="Candidate Profile" data-icon="badge" aria-label="Candidate Profile">
+<div class="screen-scroll"><div class="mobile-screen-container shadow-2xl sm:rounded-[44px] border-0 sm:border-[8px] sm:border-[#1E1B18] flex flex-col justify-between" data-purpose="mobile-viewport">
+<!-- BEGIN: TopBar -->
+<header class="pt-3 px-6 pb-2 relative z-20">
+<!-- iOS Status Bar Simulation -->
+<div class="flex justify-between items-center text-xs font-semibold tracking-tight text-neutral-800 mb-3" data-purpose="ios-status-bar">
+<span class="">9:41</span>
+<!-- Dynamic Island Placeholder -->
+<div class="w-24 h-5 bg-black rounded-full mx-auto -mt-1 hidden sm:block"></div>
+<div class="flex items-center gap-1.5">
+<!-- Signal Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25c-.2.2-.2.51 0 .71.2.2.51.2.71 0l.64-.64C7.24 19.34 9.49 20 12 20s4.76-.66 6.3-1.68l.64.64c.2.2.51.2.71 0 .2-.2.2-.51 0-.71l-.62-.64C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"></path></svg>
+<!-- Wifi -->
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0012 4z"></path></svg>
+<!-- Battery -->
+<div class="w-5 h-2.5 border border-black rounded-sm p-0.5 flex items-center">
+<div class="w-full h-full bg-black rounded-2xs"></div>
+</div>
+</div>
+</div>
+<!-- Navigation & Setup Progress Indicator -->
+<div class="flex items-center justify-between mt-2" data-purpose="step-indicator-bar">
+<a aria-label="Go back" class="w-9 h-9 rounded-full bg-white/80 border border-neutral-200/70 flex items-center justify-center text-neutral-700 shadow-sm active:scale-95 transition-transform" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</a>
+<!-- Step Pill Indicator matching reference badges -->
+<div class="flex items-center gap-1.5 bg-white/80 border border-neutral-200/80 px-3.5 py-1.5 rounded-full shadow-pill">
+<span class="text-[11px] font-bold tracking-wide uppercase text-neutral-500">Step 1 of 2</span>
+<span class="inline-block w-1 h-1 rounded-full bg-neutral-300"></span>
+<span class="text-[11px] font-bold text-amber-700 bg-amber-100/90 px-2 py-0.5 rounded-full">50% Setup</span>
+</div>
+<!-- Help / Support Button -->
+<button aria-label="Support info" class="w-9 h-9 rounded-full bg-white/80 border border-neutral-200/70 flex items-center justify-center text-neutral-700 shadow-sm" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</button>
+</div>
+</header>
+<!-- END: TopBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 px-5 pt-2 pb-6 hero-gradient-wash">
+<!-- Screen Header with Editorial Typography -->
+<section class="mt-2 mb-4" data-purpose="screen-heading">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FCE7F0] text-[#B8326D] text-[11px] font-bold tracking-wide mb-2">
+<span class="">PORTAL VERIFICATION</span>
+<span class="">✦</span>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tight text-[#1E1B18] leading-tight">
+          Candidate Profile
+        </h1>
+<p class="text-neutral-600 text-xs sm:text-sm mt-1 leading-relaxed">
+          Verify your university credentials before entering the timed exam room.
+        </p>
+</section>
+<!-- Authenticated Google User Banner -->
+<div class="bg-white/95 rounded-2xl p-3 border border-neutral-200/70 shadow-soft mb-5 flex items-center justify-between" data-purpose="authenticated-account-banner">
+<div class="flex items-center gap-3">
+<!-- Student Avatar Pill with cute pastel halo -->
+<div class="relative w-11 h-11 rounded-full bg-gradient-to-tr from-amber-200 to-rose-200 p-0.5">
+<div class="w-full h-full rounded-full bg-neutral-900 flex items-center justify-center text-white font-bold text-sm tracking-tight overflow-hidden">
+<span class="">AM</span>
+</div>
+<!-- Online status mint dot -->
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold text-neutral-900">alex.morgan@university.edu</span>
+<span class="text-emerald-700 bg-emerald-100 rounded-full p-0.5" title="Verified Google Account">
+<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path>
+</svg>
+</span>
+</div>
+<p class="text-[11px] text-neutral-500">Google Workspace Single Sign-On</p>
+</div>
+</div>
+<button class="text-[11px] font-semibold text-neutral-500 hover:text-neutral-800 bg-neutral-100 px-2.5 py-1.5 rounded-lg border border-neutral-200" type="button">
+          Switch
+        </button>
+</div>
+<!-- BEGIN: StudentDetailsForm -->
+<form action="#" class="space-y-3.5" data-purpose="student-details-form" method="POST">
+<!-- Field 1: Full Legal Name -->
+<div class="bg-white rounded-2xl p-3.5 border border-neutral-200/80 shadow-soft">
+<label class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1" for="fullName">
+            Full Legal Name
+          </label>
+<div class="relative flex items-center"><input class="w-full text-sm font-bold text-neutral-900 bg-neutral-50/70 border border-neutral-200 rounded-xl px-3 py-2 focus:bg-white focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 outline-none transition-colors" id="fullName" name="fullName" placeholder="Enter full legal name" type="text" value="Alex Morgan"></div>
+
+</div>
+<!-- Field 2: Matriculation / Roll No. -->
+<div class="bg-white rounded-2xl p-3.5 border border-neutral-200/80 shadow-soft">
+<div class="flex justify-between items-center mb-1">
+<label class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500" for="matriculationNo">Roll No.
+            </label>
+<span class="text-[10px] bg-sky-100 text-sky-800 font-semibold px-2 py-0.5 rounded-md">Required</span>
+</div>
+<div class="relative flex items-center">
+<input class="w-full text-sm font-bold text-neutral-900 bg-neutral-50/70 border border-neutral-200 rounded-xl px-3 py-2 focus:bg-white focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 outline-none transition-colors" id="matriculationNo" name="matriculationNo" placeholder="e.g. CS-2022-0894" type="text" value="CS-2022-0894">
+</div>
+<div class="flex items-center gap-1 mt-1.5 text-[10px] text-neutral-500">
+
+
+</div>
+</div>
+<!-- Field 3: Degree & Major Dropdown -->
+<div class="bg-white rounded-2xl p-3.5 border border-neutral-200/80 shadow-soft">
+<label class="block text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1" for="degreeMajor">
+            Degree &amp; Major
+          </label>
+<div class="relative">
+<select class="w-full appearance-none text-sm font-semibold text-neutral-800 bg-neutral-50/70 border border-neutral-200 rounded-xl px-3 py-2.5 pr-8 focus:bg-white focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900 outline-none transition-colors" id="degreeMajor" name="degreeMajor">
+<option selected="" value="bs_cs">B.S. Computer Science</option>
+<option value="bs_se">B.S. Software Engineering</option>
+<option value="bs_ds">B.S. Data Science &amp; Analytics</option>
+<option value="ms_cs">M.S. Computer Science</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-neutral-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Field 4: Academic Department -->
+
+<!-- Field 5: Batch & Cohort Dropdown -->
+
+<!-- Academic Integrity Pledge Card (Pastel Lavender / Blue Tint Card) -->
+<div class="bg-gradient-to-br from-[#EDE9FE] to-[#F1EAFF] rounded-2xl p-4 border border-[#DDD6FE] shadow-sm mt-4" data-purpose="honor-code-pledge">
+<div class="flex items-start gap-3">
+<div class="pt-0.5">
+<input checked="" class="w-5 h-5 rounded-lg text-purple-700 bg-white border-purple-300 focus:ring-purple-400 focus:ring-offset-0 cursor-pointer" id="pledge" name="pledge" type="checkbox">
+</div>
+<label class="text-xs text-neutral-800 leading-snug cursor-pointer select-none" for="pledge">
+<span class="font-bold block text-purple-950 mb-0.5">Academic Integrity Pledge</span>
+              I confirm that my credentials are valid and agree to the University Honor Code during timed assessments.
+            </label>
+</div>
+</div>
+<!-- Primary Action Button -->
+<div class="pt-2">
+<button class="w-full bg-[#1E1B18] hover:bg-black text-white font-bold py-4 px-6 rounded-full shadow-cta flex items-center justify-center gap-2 text-sm tracking-wide transition-all transform active:scale-[0.98]" type="submit">
+<span class="">Save &amp; Continue to Exams</span>
+<span class="text-base">→</span>
+</button>
+</div>
+</form>
+<!-- END: StudentDetailsForm -->
+<!-- Micro-footer: Safe Exam Session Indicator -->
+<footer class="mt-4 pt-1 flex items-center justify-center gap-2 text-[11px] text-neutral-500" data-purpose="security-session-footer">
+<svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+</svg>
+<span class="font-medium">Encrypted SSL Session • Proctor Guard Active</span>
+</footer>
+<!-- iOS Home Indicator bar -->
+<div class="w-32 h-1 bg-neutral-300 rounded-full mx-auto mt-4"></div>
+</main>
+<!-- END: MainContent -->
+</div></div>
+<script data-purpose="form-interactivity">
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const pledgeCheckbox = document.getElementById('pledge');
+          if (!pledgeCheckbox.checked) {
+            alert('Please accept the Academic Integrity Pledge to proceed.');
+            return;
+          }
+          // Friendly feedback demonstration
+          const btn = form.querySelector('button[type="submit"]');
+          btn.innerHTML = `<span>Saving Details...</span>`;
+          setTimeout(() => {
+            btn.innerHTML = `<span>Redirecting to Exam Lobby ✓</span>`;
+            btn.classList.remove('bg-[#1E1B18]');
+            btn.classList.add('bg-emerald-700');
+          }, 600);
+        });
+      }
+    });
+  </script>
+</section><!-- ===== code3: Exam List ===== -->
+<section id="screen-student-exams" class="screen" data-title="Exam List" data-icon="list_alt" aria-label="Exam List">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-full bg-primary-sticky flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]">school</span></div><h1 class="font-headline-md text-headline-md text-on-surface tracking-tight truncate max-w-[210px]">Exam List</h1></div><div class="flex items-center gap-space-sm"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_6px_rgba(164,48,115,0.25)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+    function handleTakeExam(examCode) {
+      // Gentle tactile feedback and simulated transition to Screen 4 (Confirm & Rules)
+      const targetCard = event.currentTarget.closest('article');
+      if (targetCard) {
+        targetCard.classList.add('scale-[0.99]');
+        setTimeout(() => {
+          targetCard.classList.remove('scale-[0.99]');
+          alert(`Proceeding to Screen 4: Confirmation & Rules for ${examCode}. Good luck, Alex! ✨`);
+        }, 150);
+      }
+    }
+
+    // Filter chip logic
+    document.querySelectorAll('.filter-chip').forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        
+        // Update chip active states
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+          chip.classList.remove('bg-on-surface', 'text-surface-container-lowest');
+          chip.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        });
+        button.classList.add('bg-on-surface', 'text-surface-container-lowest');
+        button.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+
+        // Filter cards
+        const cards = document.querySelectorAll('.exam-card');
+        cards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'flex';
+          } else if (filter === 'available') {
+            card.style.display = card.classList.contains('available') ? 'flex' : 'none';
+          } else if (filter === 'completed') {
+            card.style.display = card.classList.contains('completed') ? 'flex' : 'none';
+          }
+        });
+      });
+    });
+  </script>
+</section><!-- ===== code4: Rules & Confirmation ===== -->
+<section id="screen-student-rules" class="screen" data-title="Rules & Confirmation" data-icon="rule" aria-label="Rules & Confirmation">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><button aria-label="Go back" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container active:scale-95 transition-all" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><h1 class="font-headline-md text-headline-md text-on-surface tracking-tight truncate max-w-[210px]">Exam Rules &amp; Confirmation</h1></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_6px_rgba(164,48,115,0.25)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+  (function() {
+    const checkbox = document.getElementById('rulesCheckbox');
+    const startBtn = document.getElementById('startExamBtn');
+    const declarationCard = document.getElementById('declarationCard');
+
+    if (checkbox && startBtn) {
+      checkbox.addEventListener('change', function() {
+        if (this.checked) {
+          startBtn.removeAttribute('disabled');
+          startBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+          startBtn.classList.add('opacity-100', 'cursor-pointer', 'hover:bg-primary', 'hover:text-on-primary');
+          if (declarationCard) {
+            declarationCard.classList.add('bg-primary-fixed');
+            declarationCard.classList.remove('bg-tertiary-fixed');
+          }
+        } else {
+          startBtn.setAttribute('disabled', 'true');
+          startBtn.classList.add('opacity-40', 'cursor-not-allowed');
+          startBtn.classList.remove('opacity-100', 'cursor-pointer', 'hover:bg-primary', 'hover:text-on-primary');
+          if (declarationCard) {
+            declarationCard.classList.remove('bg-primary-fixed');
+            declarationCard.classList.add('bg-tertiary-fixed');
+          }
+        }
+      });
+
+      startBtn.addEventListener('click', function(e) {
+        if (!checkbox.checked) {
+          e.preventDefault();
+          return;
+        }
+        // Micro-interaction tactile feedback
+        this.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span><span>Launching Assessment...</span>';
+      });
+    }
+  })();
+</script>
+</section><!-- ===== code5: Active Exam Session ===== -->
+<section id="screen-student-exam" class="screen" data-title="Active Exam Session" data-icon="edit_note" aria-label="Active Exam Session">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 px-margin-mobile flex flex-col justify-center gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">school</span></div><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-bold tracking-tight">CS301: Data Structures</span><span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Active</span></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1 px-space-sm py-0.5 rounded-full bg-error-container text-on-error-container shadow-[0_2px_8px_rgba(186,26,26,0.12)]"><span class="material-symbols-outlined text-[14px] text-error animate-pulse">timer</span><span class="font-label-sm text-label-sm font-bold text-on-error-container">24:45 Remaining</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="flex items-center justify-between text-on-surface-variant"><span class="font-label-sm text-label-sm uppercase tracking-wider">Active Exam Session</span><span class="font-label-sm text-label-sm">Question 14 of 40</span></div></div></header></div>
+<script>
+  function selectOption(button) {
+    const parent = document.getElementById('options-group');
+    const allButtons = parent.querySelectorAll('.option-pill');
+    
+    allButtons.forEach(btn => {
+      btn.className = 'option-pill w-full flex items-center justify-between p-3.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container active:scale-[0.99] transition-all text-left';
+      const ind = btn.querySelector('.indicator');
+      ind.className = 'indicator w-7 h-7 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0';
+      const icon = btn.querySelector('.check-icon');
+      icon.innerText = 'radio_button_unchecked';
+      icon.className = 'material-symbols-outlined text-[20px] text-surface-dim check-icon';
+      icon.removeAttribute('style');
+      
+      const subLabel = btn.querySelector('.flex-col');
+      if (subLabel) {
+        const text = subLabel.querySelector('span:first-child').innerText;
+        subLabel.parentElement.innerHTML = `<div class="indicator w-7 h-7 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">${ind.innerText}</div><span class="font-body-lg text-body-lg font-medium">${text}</span>`;
+      }
+    });
+
+    button.className = 'option-pill active-option w-full flex items-center justify-between p-3.5 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed shadow-sm active:scale-[0.99] transition-all text-left';
+    const ind = button.querySelector('.indicator');
+    ind.className = 'indicator w-7 h-7 rounded-full bg-tertiary text-on-tertiary font-label-md text-label-md font-bold flex items-center justify-center shrink-0';
+    const icon = button.querySelector('.check-icon');
+    icon.innerText = 'check_circle';
+    icon.className = 'material-symbols-outlined text-[22px] text-tertiary check-icon';
+    icon.style.fontVariationSettings = "'FILL' 1";
+
+    const tag = document.getElementById('autosave-tag');
+    if (tag) {
+      tag.innerText = 'Saved to DB';
+      setTimeout(() => { tag.innerText = 'Autosaved just now'; }, 2000);
+    }
+  }
+
+  function toggleFlag() {
+    const btn = document.getElementById('flag-btn');
+    const icon = btn.querySelector('.material-symbols-outlined');
+    if (icon.innerText === 'bookmark_border') {
+      icon.innerText = 'bookmark';
+      icon.style.fontVariationSettings = "'FILL' 1";
+      btn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+    } else {
+      icon.innerText = 'bookmark_border';
+      icon.removeAttribute('style');
+      btn.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+    }
+  }
+
+  function openSubmitSummary() {
+    const modal = document.getElementById('review-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeSubmitSummary() {
+    const modal = document.getElementById('review-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+</script>
+</section><!-- ===== code8: Disconnection Alert ===== -->
+<section id="screen-student-disconnect" class="screen" data-title="Disconnection Alert" data-icon="wifi_off" aria-label="Disconnection Alert">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(180,160,140,0.10)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs truncate"><button aria-label="Go Back" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container-high transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><h1 class="font-headline-md text-headline-md text-on-surface truncate">Disconnection Alert Modal</h1></div><div class="flex items-center gap-space-sm shrink-0"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+  (function() {
+    let countdown = 4;
+    let attempts = 3;
+    const pingEl = document.getElementById('ping-timer');
+    const attemptEl = document.getElementById('attempt-count');
+    const retryBtn = document.getElementById('retry-btn');
+
+    const timer = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        countdown = 5;
+        if (attempts < 10) {
+          attempts++;
+          if (attemptEl) attemptEl.textContent = attempts;
+        }
+      }
+      if (pingEl) {
+        pingEl.textContent = 'Failed (Retrying in ' + countdown + 's...)';
+      }
+    }, 1000);
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', function() {
+        const originalContent = retryBtn.innerHTML;
+        retryBtn.innerHTML = '<span class="material-symbols-outlined text-[19px] animate-spin">progress_activity</span><span>Reconnecting...</span>';
+        retryBtn.disabled = true;
+        setTimeout(() => {
+          retryBtn.innerHTML = originalContent;
+          retryBtn.disabled = false;
+          countdown = 5;
+          if (pingEl) pingEl.textContent = 'Failed (Retrying in 5s...)';
+        }, 1600);
+      });
+    }
+  })();
+</script>
+</section><!-- ===== code9: Time Expired ===== -->
+<section id="screen-student-timeup" class="screen" data-title="Time Expired" data-icon="hourglass_bottom" aria-label="Time Expired">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(180,160,140,0.10)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs truncate"><button aria-label="Go Back" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container-high transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><h1 class="font-headline-md text-headline-md text-on-surface truncate">Time Expired Auto Submit</h1></div><div class="flex items-center gap-space-sm shrink-0"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+  // Simple micro-interaction for expanding proctor token and simulating step completion
+  const tokenBtn = document.getElementById('token-toggle-btn');
+  const tokenCard = document.getElementById('token-card');
+
+  if (tokenBtn && tokenCard) {
+    tokenBtn.addEventListener('click', () => {
+      tokenCard.classList.toggle('hidden');
+    });
+  }
+
+  // Gentle progression animation loop for delight
+  const fill = document.getElementById('action-progress-fill');
+  if (fill) {
+    let width = 92;
+    setInterval(() => {
+      if (width < 98) {
+        width += 1;
+        fill.style.width = width + '%';
+      }
+    }, 1800);
+  }
+</script>
+</section><!-- ===== code6: Submission Verified ===== -->
+<section id="screen-student-done" class="screen" data-title="Submission Verified" data-icon="verified" aria-label="Submission Verified">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go Back" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Assessment</span><h1 class="font-headline-md text-headline-md text-on-surface leading-tight">Submission Verification</h1></div></div><div class="flex items-center gap-space-sm"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-low rounded-full"><span class="material-symbols-outlined text-[16px] text-primary">verified</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Secure Mode</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+  (function () {
+    // Interactive countdown ticker
+    let timeLeft = 8;
+    const totalTime = 8;
+    const perimeter = 56.5; // 2 * PI * 9
+    const timerElem = document.getElementById('countdownSec');
+    const ringElem = document.getElementById('countdownRing');
+    const pauseBtn = document.getElementById('pauseRedirectBtn');
+    let timerPaused = false;
+
+    const interval = setInterval(() => {
+      if (timerPaused) return;
+      timeLeft--;
+      if (timerElem) timerElem.textContent = timeLeft;
+      if (ringElem) {
+        const offset = perimeter - (timeLeft / totalTime) * perimeter;
+        ringElem.style.strokeDashoffset = offset;
+      }
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        // Simulation of smooth redirection
+        if (timerElem) timerElem.textContent = '0';
+      }
+    }, 1000);
+
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => {
+        timerPaused = !timerPaused;
+        pauseBtn.textContent = timerPaused ? 'Resume' : 'Stay';
+        if (timerPaused && timerElem) {
+          timerElem.parentElement.classList.add('opacity-75');
+        } else if (timerElem) {
+          timerElem.parentElement.classList.remove('opacity-75');
+        }
+      });
+    }
+
+    // Copy Receipt ID Micro-interaction
+    const copyBtn = document.getElementById('copyHashBtn');
+    const hashSpan = document.getElementById('receiptHash');
+    if (copyBtn && hashSpan) {
+      copyBtn.addEventListener('click', () => {
+        const text = hashSpan.innerText || 'TXN-84920-SEC9942-VERIFIED';
+        navigator.clipboard?.writeText(text).catch(() => {});
+        const icon = copyBtn.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.textContent = 'check';
+          setTimeout(() => {
+            icon.textContent = 'content_copy';
+          }, 2000);
+        }
+      });
+    }
+
+    // Download Receipt feedback
+    const dlBtn = document.getElementById('downloadReceiptBtn');
+    if (dlBtn) {
+      dlBtn.addEventListener('click', () => {
+        const originalContent = dlBtn.innerHTML;
+        dlBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Generating PDF...</span>';
+        setTimeout(() => {
+          dlBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-primary">check_circle</span><span>Receipt Saved!</span>';
+          setTimeout(() => {
+            dlBtn.innerHTML = originalContent;
+          }, 2500);
+        }, 900);
+      });
+    }
+  })();
+</script>
+</section><!-- ===== code10: Faculty Login ===== -->
+<section id="screen-faculty-login" class="screen" data-title="Faculty Login" data-icon="lock" aria-label="Faculty Login">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go back" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[20px]">arrow_back</span></button><h1 class="font-headline-md text-headline-md text-on-surface tracking-tight truncate max-w-[200px]">Faculty Login</h1></div><div class="flex items-center gap-space-xs"><button aria-label="Portal Help &amp; Support" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+  (function() {
+    var toggleBtn = document.getElementById('toggle-pw-btn');
+    var pwInput = document.getElementById('faculty-password');
+    var pwIcon = document.getElementById('toggle-pw-icon');
+
+    if (toggleBtn && pwInput && pwIcon) {
+      toggleBtn.addEventListener('click', function() {
+        var isPassword = pwInput.getAttribute('type') === 'password';
+        pwInput.setAttribute('type', isPassword ? 'text' : 'password');
+        pwIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+      });
+    }
+  })();
+</script>
+</section><!-- ===== code11: Create New Exam ===== -->
+<section id="screen-faculty-new-exam" class="screen" data-title="Create New Exam" data-icon="add_circle" aria-label="Create New Exam">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go back" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm tracking-wide">FACULTY</span><span class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Drafting</span></div><h1 class="font-headline-md text-headline-md text-on-surface truncate">Create New Exam</h1></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+
+</section><!-- ===== code11a: Exam Basics ===== -->
+<section id="screen-faculty-basics" class="screen" data-title="Exam Basics" data-icon="description" aria-label="Exam Basics">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-20 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go Back" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container active:scale-95 transition-all shrink-0" onclick="history.back()"><span class="material-symbols-outlined text-[20px]">arrow_back</span></button><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm tracking-wide uppercase">Faculty</span><span class="font-label-sm text-label-sm text-on-surface-variant">• 1 of 3 (Basics)</span></div><h1 class="font-headline-md text-headline-md text-on-surface truncate tracking-tight">Create Examination</h1></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header></div>
+<script>
+  function selectAssessment(btn) {
+    const group = document.getElementById('assessment-type-group');
+    group.querySelectorAll('.assessment-pill').forEach(el => {
+      el.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'shadow-sm');
+      el.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+      const icon = el.querySelector('.material-symbols-outlined');
+      if (icon) icon.classList.add('opacity-0');
+    });
+
+    btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+    btn.classList.add('bg-secondary-container', 'text-on-secondary-container', 'shadow-sm');
+    const activeIcon = btn.querySelector('.material-symbols-outlined');
+    if (activeIcon) activeIcon.classList.remove('opacity-0');
+  }
+
+  function toggleSwitch(btn) {
+    const isChecked = btn.getAttribute('aria-checked') === 'true';
+    btn.setAttribute('aria-checked', (!isChecked).toString());
+    if (isChecked) {
+      btn.classList.remove('bg-primary', 'justify-end');
+      btn.classList.add('bg-surface-container-high', 'justify-start');
+    } else {
+      btn.classList.remove('bg-surface-container-high', 'justify-start');
+      btn.classList.add('bg-primary', 'justify-end');
+    }
+  }
+
+  function updateDuration(val) {
+    const display = document.getElementById('duration-display');
+    if (display) {
+      display.textContent = `${val} mins`;
+    }
+  }
+
+  function regenerateCode() {
+    const rand = Math.floor(1000 + Math.random() * 9000);
+    const label = document.getElementById('exam-code-label');
+    if (label) {
+      label.textContent = `CS301-2025-${rand}`;
+    }
+  }
+
+  function copyCode(btn) {
+    const label = document.getElementById('exam-code-label');
+    if (label) {
+      navigator.clipboard?.writeText(label.textContent);
+      const span = btn.querySelector('span:last-child');
+      if (span) {
+        const originalText = span.textContent;
+        span.textContent = 'Copied!';
+        setTimeout(() => { span.textContent = originalText; }, 1500);
+      }
+    }
+  }
+</script>
+</section><!-- ===== code11c: Proctor & Security ===== -->
+<section id="screen-faculty-proctor" class="screen" data-title="Proctor & Security" data-icon="shield" aria-label="Proctor & Security">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go Back" class="w-11 h-11 rounded-full flex items-center justify-center bg-surface-container-high/60 text-on-surface hover:bg-surface-container-highest transition-colors active:scale-95" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button><div class="flex flex-col min-w-0"><h1 class="font-headline-md text-headline-md text-on-surface truncate">Exam Creation Step 3</h1><p class="font-label-sm text-label-sm text-on-surface-variant truncate">Step 3 of 3 (Proctor &amp; Security)</p></div></div><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+  // Micro-interaction for toggles
+  document.querySelectorAll('button[role="switch"]').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const isChecked = toggle.getAttribute('aria-checked') === 'true';
+      toggle.setAttribute('aria-checked', !isChecked);
+      
+      const thumb = toggle.querySelector('div');
+      if (!isChecked) {
+        toggle.classList.remove('bg-surface-container-highest', 'justify-start');
+        toggle.classList.add('bg-primary', 'justify-end');
+        thumb.classList.remove('bg-on-surface-variant/40');
+        thumb.classList.add('bg-on-primary');
+      } else {
+        toggle.classList.remove('bg-primary', 'justify-end');
+        toggle.classList.add('bg-surface-container-highest', 'justify-start');
+        thumb.classList.remove('bg-on-primary');
+        thumb.classList.add('bg-on-surface-variant/40');
+      }
+    });
+  });
+</script>
+</section><!-- ===== code12: Grading & Results ===== -->
+<section id="screen-faculty-grading" class="screen" data-title="Grading & Results" data-icon="grading" aria-label="Grading & Results">
+<div class="screen-scroll"><header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="Go Back" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container-high transition-colors active:scale-95" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex flex-col"><h1 class="font-headline-md text-headline-md text-on-surface leading-tight">Auto Grading &amp; Results</h1><span class="inline-flex items-center gap-1 text-label-sm font-label-sm text-primary uppercase tracking-wider">Faculty Assessment</span></div></div><div class="flex items-center gap-space-xs"><span class="hidden xs:inline-flex items-center px-space-sm py-space-xs rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">FACULTY</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div>
+<script>
+  (function initModerationScreen() {
+    const slider = document.getElementById('curve-slider');
+    const label = document.getElementById('curve-value-label');
+    const status = document.getElementById('curve-status');
+    const q17Toggle = document.getElementById('q17-toggle');
+
+    function updateCurveStatus() {
+      const val = parseFloat(slider.value);
+      label.textContent = '+' + val.toFixed(1) + ' Pts';
+      
+      const hasQ17 = q17Toggle && q17Toggle.checked;
+      
+      if (val === 0 && !hasQ17) {
+        status.textContent = 'Raw Scores';
+        status.className = 'px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold';
+      } else {
+        const bonusDesc = (val > 0 ? `+${val}pt curve` : '') + (val > 0 && hasQ17 ? ' & ' : '') + (hasQ17 ? '+1pt Q17' : '');
+        status.textContent = `Moderated (${bonusDesc})`;
+        status.className = 'px-space-sm py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold animate-pulse';
+      }
+    }
+
+    if (slider) {
+      slider.addEventListener('input', updateCurveStatus);
+    }
+    if (q17Toggle) {
+      q17Toggle.addEventListener('change', updateCurveStatus);
+    }
+  })();
+</script>
+</section>
+
+  <div id="next-pill"></div>
+
+  <nav id="tabbar" aria-label="Primary">
+    <button class="nav-btn" data-nav="__drawer_home" type="button" onclick="showScreen('student-login')">
+      <span class="material-symbols-outlined">school</span>Student</button>
+    <button class="nav-btn" data-nav="student-exams" type="button"><span class="material-symbols-outlined">list_alt</span>Exams</button>
+    <button class="nav-btn" data-nav="student-exam" type="button"><span class="material-symbols-outlined">edit_note</span>Exam</button>
+    <button class="nav-btn" data-nav="faculty-login" type="button"><span class="material-symbols-outlined">lock</span>Faculty</button>
+    <button class="nav-btn" data-nav="faculty-grading" type="button"><span class="material-symbols-outlined">grading</span>Results</button>
+  </nav>
+
+  <!-- screen drawer -->
+  <div id="drawer" style="display:none;position:absolute;inset:0;z-index:120;">
+    <div onclick="closeDrawer()" style="position:absolute;inset:0;background:rgba(23,20,18,.5);"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;max-height:75%;overflow:auto;background:#fffcfa;
+                border-radius:28px 28px 0 0;padding:18px 16px calc(env(safe-area-inset-bottom,0px) + 18px);">
+      <div style="font-weight:800;font-size:15px;margin-bottom:4px;">All screens</div>
+      <div style="font-size:12px;color:#8a817b;margin-bottom:14px;">Every original page, combined seamlessly.</div>
+      <div id="drawer-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const FLOW = {"student-login": [{"to": "student-profile", "label": "Continue"}, {"to": "faculty-login", "label": "Faculty?"}], "student-profile": [{"to": "student-exams", "label": "Save & Continue"}], "student-exams": [{"to": "student-rules", "label": "Take Exam"}], "student-rules": [{"to": "student-exam", "label": "Start Exam"}], "student-exam": [{"to": "student-disconnect", "label": "Demo: Disconnect"}], "student-disconnect": [{"to": "student-timeup", "label": "Demo: Time Up"}], "student-timeup": [{"to": "student-done", "label": "Demo: Submitted"}], "student-done": [{"to": "student-exams", "label": "Back to Exams"}], "faculty-login": [{"to": "faculty-new-exam", "label": "Dashboard"}], "faculty-new-exam": [{"to": "faculty-basics", "label": "Next: Questions"}], "faculty-basics": [{"to": "faculty-proctor", "label": "Next: Proctor"}], "faculty-proctor": [{"to": "faculty-grading", "label": "Finish & View Grading"}]};
+const ORDER = ["student-login", "student-profile", "student-exams", "student-rules", "student-exam", "student-disconnect", "student-timeup", "student-done", "faculty-login", "faculty-new-exam", "faculty-basics", "faculty-proctor", "faculty-grading"];
+const TITLES = {"student-login": "Student Login", "student-profile": "Candidate Profile", "student-exams": "Exam List", "student-rules": "Rules & Confirmation", "student-exam": "Active Exam Session", "student-disconnect": "Disconnection Alert", "student-timeup": "Time Expired", "student-done": "Submission Verified", "faculty-login": "Faculty Login", "faculty-new-exam": "Create New Exam", "faculty-basics": "Exam Basics", "faculty-proctor": "Proctor & Security", "faculty-grading": "Grading & Results"};
+const ICONS = {"student-login": "login", "student-profile": "badge", "student-exams": "list_alt", "student-rules": "rule", "student-exam": "edit_note", "student-disconnect": "wifi_off", "student-timeup": "hourglass_bottom", "student-done": "verified", "faculty-login": "lock", "faculty-new-exam": "add_circle", "faculty-basics": "description", "faculty-proctor": "shield", "faculty-grading": "grading"};
+let historyStack = [];
+let current = null;
+
+function showScreen(id, pushHistory) {
+  if (pushHistory !== false && current && current !== id) historyStack.push(current);
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-' + id);
+  if (!el) return;
+  el.classList.add('active');
+  el.querySelector('.screen-scroll').scrollTop = 0;
+  current = id;
+  document.getElementById('ab-title').textContent = TITLES[id] || '';
+  document.getElementById('brand-chip').textContent =
+      id.indexOf('faculty') === 0 ? 'FACULTY' : 'STUDENT';
+  // tab highlight
+  const tabs = {'student-login':'__drawer_home','student-profile':'__drawer_home',
+    'student-exams':'student-exams','student-rules':'student-exams',
+    'student-exam':'student-exam','student-disconnect':'student-exam','student-timeup':'student-exam',
+    'student-done':'student-exam','faculty-login':'faculty-login','faculty-new-exam':'faculty-login',
+    'faculty-basics':'faculty-login','faculty-proctor':'faculty-login','faculty-grading':'faculty-grading'};
+  document.querySelectorAll('#tabbar .nav-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.nav === tabs[id]));
+  // next pill(s)
+  const pill = document.getElementById('next-pill');
+  pill.innerHTML = '';
+  (FLOW[id] || []).forEach((f, i) => {
+    const b = document.createElement('button');
+    if (i > 0) b.className = 'alt';
+    b.type = 'button';
+    b.innerHTML = f.label + '<span class="material-symbols-outlined">arrow_forward</span>';
+    b.onclick = () => showScreen(f.to);
+    pill.appendChild(b);
+  });
+  pill.classList.toggle('show', !!(FLOW[id] || []).length);
+  closeDrawer();
+  try { history.replaceState(null, '', '#' + id); } catch (e) {}
+}
+
+function goBack() {
+  if (historyStack.length) showScreen(historyStack.pop(), false);
+  else showScreen('student-login', false);
+}
+document.getElementById('btn-back').onclick = goBack;
+
+function openDrawer() {
+  const list = document.getElementById('drawer-list');
+  list.innerHTML = '';
+  ORDER.forEach(id => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.style.cssText = 'display:flex;align-items:center;gap:12px;width:100%;text-align:left;' +
+      'border:1px solid rgba(30,27,24,.08);background:#fff;border-radius:16px;padding:12px 14px;' +
+      'font-family:inherit;font-weight:700;font-size:14px;color:#1E1B18;cursor:pointer;';
+    b.innerHTML = '<span class="material-symbols-outlined" style="color:#6750A4">' + ICONS[id] +
+      '</span>' + TITLES[id];
+    b.onclick = () => showScreen(id);
+    list.appendChild(b);
+  });
+  document.getElementById('drawer').style.display = 'block';
+}
+function closeDrawer() { document.getElementById('drawer').style.display = 'none'; }
+document.getElementById('btn-menu').onclick = openDrawer;
+
+// tab bar wiring
+document.querySelectorAll('#tabbar .nav-btn').forEach(b => {
+  const t = b.dataset.nav;
+  if (t !== '__drawer_home') b.onclick = () => showScreen(t);
+});
+
+// init from hash
+const start = (location.hash || '').slice(1);
+showScreen(ORDER.includes(start) ? start : 'student-login', false);
+</script>
+</body>
+</html>
